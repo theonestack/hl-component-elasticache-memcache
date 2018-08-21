@@ -40,7 +40,7 @@ CloudFormation do
     CacheSubnetGroupName Ref(:CacheSubnetGroup)
   }
 
-  record = (defined? dns_record ? "#{dns_record}" : 'memcache')
+  record = defined?(dns_record) ? "#{dns_record}" : 'memcache'
 
   Route53_RecordSet(:ElasticacheRecord) {
     HostedZoneName FnJoin('', [ Ref(:EnvironmentName), '.', Ref(:DnsDomain), '.'])
