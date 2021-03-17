@@ -1,21 +1,29 @@
 CfhighlanderTemplate do
-  Name 'ElastiCacheMemcache'
-  Description "#{component_name} - #{component_version}"
-  ComponentVersion component_version
 
-  DependsOn 'vpc'
+  DependsOn 'lib-ec2@0.1.0'
+
+  Description "#{component_name} - #{component_version} - (#{template_name}@#{template_version})"
+  Name 'memcached'
 
   Parameters do
     ComponentParam 'VPCId'
-    ComponentParam 'StackOctet', isGlobal: true
-    ComponentParam 'EnvironmentName', 'dev', isGlobal: true
-    ComponentParam 'EnvironmentType', 'development', isGlobal: true, allowedValues: ['development', 'production']
-    ComponentParam 'DnsDomain'
-    ComponentParam 'CacheInstanceType'
-    ComponentParam 'CacheNodes', 1
 
-    maximum_availability_zones.times do |az|
-      ComponentParam "SubnetCache#{az}"
-    end
+    ComponentParam 'EnvironmentName', 'dev', isGlobal: true
+
+    ComponentParam 'EnvironmentType', 'development', 
+      allowedValues: ['development','production'], isGlobal: true
+
+    ComponentParam 'VPCId', type: 'AWS::EC2::VPC::Id'
+
+    ComponentParam 'SubnetIds', type: 'CommaDelimitedList',
+      description: 'Comma-delimited list of subnets to launch memcache in'
+
+    ComponentParam 'DnsDomain'
+
+    ComponentParam 'InstanceType', 'cache.t3.small',
+      description: 'The compute and memory capacity of the nodes in the cluster'
+
+    ComponentParam 'NumOfNodes', 1
+
   end
 end
