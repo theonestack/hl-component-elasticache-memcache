@@ -1,6 +1,6 @@
 CloudFormation do
 
-  Condition("IsMoreThanOneNode", FnNot(FnEquals("NumOfNodes", "1")))
+  Condition("IsMoreThanOneNode", FnNot(FnEquals(Ref(:NumOfNodes), '1')))
 
   component_name = external_parameters.fetch(:component_name)
 
