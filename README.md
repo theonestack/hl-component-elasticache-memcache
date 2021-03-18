@@ -1,5 +1,4 @@
-![build-status](https://travis-ci.com/theonestack/hl-component-elasticache-memcache.svg?branch=master)
-
+![cftest](https://github.com/theonestack/hl-component-elasticache-memcache/actions/workflows/rspec.yml/badge.svg)
 ### Cfhighlander ElastiCache Memcache component
 
 ```bash
